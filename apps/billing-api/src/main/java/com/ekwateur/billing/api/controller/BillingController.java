@@ -2,6 +2,7 @@ package com.ekwateur.billing.api.controller;
 
 import java.util.Optional;
 
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -42,9 +44,11 @@ public class BillingController {
             @ApiResponse(responseCode = "404", description = "if the customer reference was not found"),
             @ApiResponse(responseCode = "500", description = "Internal Server error"),
     })
-    Bill getBill(@PathVariable("customer-reference")
+    Bill getBill(@Validated
+                 @Pattern(regexp = "^EKW(\\d{8})$")
+                 @PathVariable("customer-reference")
                  String customerReference,
-                 DateRange dateRange) throws CustomerNotFoundException {
+                 ConsumptionRange consumptionRange) throws CustomerNotFoundException {
 
         Optional<Customer> customer = customerService.getCustomer(customerReference);
 
@@ -52,7 +56,7 @@ public class BillingController {
             throw new CustomerNotFoundException("no customer with reference [%s] was found".formatted(customerReference));
         }
 
-        return billingService.getBill(customer.get(), dateRange.startDate(), dateRange.endDate());
+        return billingService.getBill(customer.get(), consumptionRange.startDate(), consumptionRange.endDate());
     }
 
 }

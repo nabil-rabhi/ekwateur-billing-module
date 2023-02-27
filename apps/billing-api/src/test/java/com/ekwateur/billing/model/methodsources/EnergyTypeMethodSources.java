@@ -8,7 +8,7 @@ import java.util.List;
 
 import com.ekwateur.billing.model.energy.EnergyType;
 import com.ekwateur.billing.model.energy.fixtures.EnergyTypeFixture;
-import com.ekwateur.billing.model.energy.scenario.EnergyTypeScenario;
+import com.ekwateur.billing.test.scenarios.specific.AmountPerEnergyTypeScenario;
 
 import lombok.experimental.UtilityClass;
 
@@ -19,72 +19,72 @@ public class EnergyTypeMethodSources {
     private static final LocalDate START_DATE = LocalDate.parse("2023-02-01", DateTimeFormatter.ISO_LOCAL_DATE);
     private static final LocalDate END_DATE = LocalDate.parse("2023-02-28", DateTimeFormatter.ISO_LOCAL_DATE);
 
-    public static List<EnergyTypeScenario> energyTypeScenarios() {
+    public static List<AmountPerEnergyTypeScenario> energyTypeScenarios() {
 
-        List<EnergyTypeScenario> energyTypeAmountScenarios = new ArrayList<>(electricityScenarios());
-        energyTypeAmountScenarios.addAll(gasScenarios());
-        return energyTypeAmountScenarios;
+        List<AmountPerEnergyTypeScenario> amountPerEnergyTypeScenarios = new ArrayList<>(electricityAmountScenarios());
+        amountPerEnergyTypeScenarios.addAll(gasAmountScenarios());
+        return amountPerEnergyTypeScenarios;
     }
 
-    private static List<EnergyTypeScenario> electricityScenarios() {
+    private static List<AmountPerEnergyTypeScenario> electricityAmountScenarios() {
 
         return List.of(
-                EnergyTypeScenario.builder()
-                                  .description("Elecrticité - cas d'un client particulier")
-                                  .customer(EnergyTypeFixture.INDIVIDUAL_CUSTOMER)
-                                  .energyType(EnergyType.ELECTRICITY)
-                                  .startDate(START_DATE)
-                                  .endDate(END_DATE)
-                                  .expectedAmount(BigDecimal.valueOf(3.27))
-                                  .build(),
-                EnergyTypeScenario.builder()
-                                  .description("Elecrticité - cas d'un client pro ayant un chiffre d'affaire <1_000_000")
-                                  .customer(EnergyTypeFixture.PRO_CUSTOMER_WITH_REVENUE_LESSER_THAN_ONE_MILLION)
-                                  .energyType(EnergyType.ELECTRICITY)
-                                  .startDate(START_DATE)
-                                  .endDate(END_DATE)
-                                  .expectedAmount(BigDecimal.valueOf(3.19))
-                                  .build(),
-                EnergyTypeScenario.builder()
-                                  .description("Electricité - cas d'un client pro ayant un chiffre d'affaire >=1_000_000")
-                                  .customer(EnergyTypeFixture.PRO_CUSTOMER_WITH_REVENUE_HIGHER_THAN_ONE_MILLION)
-                                  .energyType(EnergyType.ELECTRICITY)
-                                  .startDate(START_DATE)
-                                  .endDate(END_DATE)
-                                  .expectedAmount(BigDecimal.valueOf(3.08))
-                                  .build()
+                AmountPerEnergyTypeScenario.builder()
+                                           .description("Elecrticité - cas d'un client particulier")
+                                           .customer(EnergyTypeFixture.INDIVIDUAL_CUSTOMER)
+                                           .energyType(EnergyType.ELECTRICITY)
+                                           .startDate(START_DATE)
+                                           .endDate(END_DATE)
+                                           .expectedAmount(BigDecimal.valueOf(3.27))
+                                           .build(),
+                AmountPerEnergyTypeScenario.builder()
+                                           .description("Elecrticité - cas d'un client pro ayant un chiffre d'affaire <1_000_000")
+                                           .customer(EnergyTypeFixture.PRO_CUSTOMER_WITH_REVENUE_LESSER_THAN_ONE_MILLION)
+                                           .energyType(EnergyType.ELECTRICITY)
+                                           .startDate(START_DATE)
+                                           .endDate(END_DATE)
+                                           .expectedAmount(BigDecimal.valueOf(3.19))
+                                           .build(),
+                AmountPerEnergyTypeScenario.builder()
+                                           .description("Electricité - cas d'un client pro ayant un chiffre d'affaire >=1_000_000")
+                                           .customer(EnergyTypeFixture.PRO_CUSTOMER_WITH_REVENUE_HIGHER_THAN_ONE_MILLION)
+                                           .energyType(EnergyType.ELECTRICITY)
+                                           .startDate(START_DATE)
+                                           .endDate(END_DATE)
+                                           .expectedAmount(BigDecimal.valueOf(3.08))
+                                           .build()
         );
     }
 
-    private static List<EnergyTypeScenario> gasScenarios() {
+    private static List<AmountPerEnergyTypeScenario> gasAmountScenarios() {
 
         return List.of(
-                EnergyTypeScenario.builder()
-                                  .description("Gaz - cas d'un client particulier")
-                                  .customer(EnergyTypeFixture.INDIVIDUAL_CUSTOMER)
-                                  .energyType(EnergyType.GAS)
-                                  .startDate(START_DATE)
-                                  .endDate(END_DATE)
-                                  .expectedAmount(BigDecimal.valueOf(3.10))
-                                  .build(),
+                AmountPerEnergyTypeScenario.builder()
+                                           .description("Gaz - cas d'un client particulier")
+                                           .customer(EnergyTypeFixture.INDIVIDUAL_CUSTOMER)
+                                           .energyType(EnergyType.GAS)
+                                           .startDate(START_DATE)
+                                           .endDate(END_DATE)
+                                           .expectedAmount(BigDecimal.valueOf(3.10))
+                                           .build(),
 
-                EnergyTypeScenario.builder()
-                                  .description("Gaz - cas d'un client pro ayant un chiffre d'affaire <1_000_000")
-                                  .customer(EnergyTypeFixture.PRO_CUSTOMER_WITH_REVENUE_LESSER_THAN_ONE_MILLION)
-                                  .energyType(EnergyType.GAS)
-                                  .startDate(START_DATE)
-                                  .endDate(END_DATE)
-                                  .expectedAmount(BigDecimal.valueOf(3.05))
-                                  .build(),
+                AmountPerEnergyTypeScenario.builder()
+                                           .description("Gaz - cas d'un client pro ayant un chiffre d'affaire <1_000_000")
+                                           .customer(EnergyTypeFixture.PRO_CUSTOMER_WITH_REVENUE_LESSER_THAN_ONE_MILLION)
+                                           .energyType(EnergyType.GAS)
+                                           .startDate(START_DATE)
+                                           .endDate(END_DATE)
+                                           .expectedAmount(BigDecimal.valueOf(3.05))
+                                           .build(),
 
-                EnergyTypeScenario.builder()
-                                  .description("Gaz - cas d'un client pro ayant un chiffre d'affaire >=1_000_000")
-                                  .customer(EnergyTypeFixture.PRO_CUSTOMER_WITH_REVENUE_HIGHER_THAN_ONE_MILLION)
-                                  .energyType(EnergyType.GAS)
-                                  .startDate(START_DATE)
-                                  .endDate(END_DATE)
-                                  .expectedAmount(BigDecimal.valueOf(3.00))
-                                  .build()
+                AmountPerEnergyTypeScenario.builder()
+                                           .description("Gaz - cas d'un client pro ayant un chiffre d'affaire >=1_000_000")
+                                           .customer(EnergyTypeFixture.PRO_CUSTOMER_WITH_REVENUE_HIGHER_THAN_ONE_MILLION)
+                                           .energyType(EnergyType.GAS)
+                                           .startDate(START_DATE)
+                                           .endDate(END_DATE)
+                                           .expectedAmount(BigDecimal.valueOf(3.00))
+                                           .build()
         );
     }
 

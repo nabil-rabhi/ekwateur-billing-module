@@ -36,7 +36,7 @@
         <!-- project component dependencies -->
         <dependency>
             <groupId>com.ekwateur.billing</groupId>
-            <artifactId>billing-model</artifactId>
+            <artifactId>billing-common-test</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 

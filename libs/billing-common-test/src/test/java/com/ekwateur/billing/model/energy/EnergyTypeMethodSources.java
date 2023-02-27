@@ -1,4 +1,4 @@
-package com.ekwateur.billing.model.energy.scenario.methodsources;
+package com.ekwateur.billing.model.energy;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ekwateur.billing.model.energy.EnergyType;
-import com.ekwateur.billing.model.energy.scenario.AmountPerEnergyTypeScenario;
-import com.ekwateur.billing.model.energy.scenario.fixtures.EnergyTypeFixture;
+import com.ekwateur.billing.test.fixtures.EnergyTypeFixture;
+import com.ekwateur.billing.test.scenarios.specific.AmountPerEnergyTypeScenario;
 
 import lombok.experimental.UtilityClass;
 
@@ -19,7 +19,7 @@ public class EnergyTypeMethodSources {
     private static final LocalDate START_DATE = LocalDate.parse("2023-02-01", DateTimeFormatter.ISO_LOCAL_DATE);
     private static final LocalDate END_DATE = LocalDate.parse("2023-02-28", DateTimeFormatter.ISO_LOCAL_DATE);
 
-    public static List<AmountPerEnergyTypeScenario> energyTypeScenarios() {
+    public static List<AmountPerEnergyTypeScenario> amountPerEnergyTypeScenarios() {
 
         List<AmountPerEnergyTypeScenario> amountPerEnergyTypeScenarios = new ArrayList<>(electricityScenarios());
         amountPerEnergyTypeScenarios.addAll(gasScenarios());

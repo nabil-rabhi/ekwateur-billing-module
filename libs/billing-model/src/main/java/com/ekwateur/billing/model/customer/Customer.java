@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Predicate;
 
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
@@ -16,7 +15,6 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public sealed class Customer permits ProCustomer, IndividualCustomer {
 
-    @NotBlank
     @Pattern(regexp = "^EKW(\\d{8})$")
     protected final String reference;
 

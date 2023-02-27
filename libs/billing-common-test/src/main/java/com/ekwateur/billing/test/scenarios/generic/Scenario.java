@@ -1,4 +1,4 @@
-package com.ekwateur.billing.test.scenarios;
+package com.ekwateur.billing.test.scenarios.generic;
 
 
 import org.junit.jupiter.params.provider.Arguments;

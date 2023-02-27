@@ -1,4 +1,4 @@
-package com.ekwateur.billing.model.energy.scenario.fixtures;
+package com.ekwateur.billing.test.fixtures;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

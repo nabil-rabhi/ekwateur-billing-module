@@ -1,4 +1,4 @@
-package com.ekwateur.billing.test.scenarios;
+package com.ekwateur.billing.test.annotation;
 
 import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;

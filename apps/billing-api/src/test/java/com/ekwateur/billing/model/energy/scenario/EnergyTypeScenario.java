@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 import com.ekwateur.billing.model.customer.Customer;
 import com.ekwateur.billing.model.energy.EnergyType;
-import com.ekwateur.billing.test.scenarios.Scenario;
+import com.ekwateur.billing.test.scenarios.generic.Scenario;
 
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;

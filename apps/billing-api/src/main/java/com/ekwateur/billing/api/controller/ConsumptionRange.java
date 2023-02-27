@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-public record DateRange(
+public record ConsumptionRange(
 
         @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
         LocalDate startDate,
