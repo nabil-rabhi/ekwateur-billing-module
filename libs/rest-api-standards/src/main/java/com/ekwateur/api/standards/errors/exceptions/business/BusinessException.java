@@ -1,15 +1,14 @@
 package com.ekwateur.api.standards.errors.exceptions.business;
 
-import java.util.Collection;
+import com.ekwateur.api.standards.errors.exceptions.ApiException;
 
-import org.springframework.http.HttpStatus;
-
-public abstract class BusinessException extends Exception {
+public abstract class BusinessException extends Exception implements ApiException {
 
     private static final long serialVersionUID = -5069808693311840644L;
 
-    public abstract Collection<BusinessError> getErrors();
+    protected BusinessException(String message) {
 
-    public abstract HttpStatus getResponseStatus();
+        super(message);
+    }
 
 }

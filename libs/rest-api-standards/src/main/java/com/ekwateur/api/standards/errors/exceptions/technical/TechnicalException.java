@@ -1,21 +1,14 @@
 package com.ekwateur.api.standards.errors.exceptions.technical;
 
-import org.springframework.http.HttpStatus;
+import com.ekwateur.api.standards.errors.exceptions.ApiException;
 
-public abstract class TechnicalException extends RuntimeException {
+public abstract class TechnicalException extends RuntimeException implements ApiException {
 
     private static final long serialVersionUID = -3983940107725199007L;
 
-    public abstract TechnicalError getError();
+    protected TechnicalException(String message) {
 
-    protected TechnicalException() {
-
-        super();
-    }
-
-    public HttpStatus getResponseStatus() {
-
-        return HttpStatus.INTERNAL_SERVER_ERROR;
+        super(message);
     }
 
 }

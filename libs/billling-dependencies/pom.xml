@@ -24,7 +24,6 @@
         <jakarta.validation-api.version>3.0.2</jakarta.validation-api.version>
         <guava.version>31.1-jre</guava.version>
 
-        <javax.servlet-api.version>4.0.1</javax.servlet-api.version>
     </properties>
 
     <dependencyManagement>
@@ -131,12 +130,6 @@
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>javax.servlet</groupId>
-                <artifactId>javax.servlet-api</artifactId>
-                <version>${javax.servlet-api.version}</version>
-                <scope>provided</scope>
             </dependency>
 
         </dependencies>

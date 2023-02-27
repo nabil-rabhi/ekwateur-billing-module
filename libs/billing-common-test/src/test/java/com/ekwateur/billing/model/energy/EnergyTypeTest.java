@@ -7,13 +7,13 @@ import java.math.BigDecimal;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import com.ekwateur.billing.test.annotation.ScenarioParameterizedTest;
-import com.ekwateur.billing.test.scenarios.specific.AmountPerEnergyTypeScenario;
+import com.ekwateur.billing.test.scenarios.specific.EnergyTypeScenario;
 
 class EnergyTypeTest {
 
     @ScenarioParameterizedTest
     @MethodSource("com.ekwateur.billing.model.energy.EnergyTypeMethodSources#amountPerEnergyTypeScenarios")
-    void getBillingAmount_should_return_expected_result(AmountPerEnergyTypeScenario scenario) {
+    void getBillingAmount_should_return_expected_result(EnergyTypeScenario scenario) {
 
         //given
         EnergyType energyType = scenario.getEnergyType();

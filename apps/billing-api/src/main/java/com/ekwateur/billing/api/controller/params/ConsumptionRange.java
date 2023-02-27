@@ -1,4 +1,4 @@
-package com.ekwateur.billing.api.controller;
+package com.ekwateur.billing.api.controller.params;
 
 import java.time.LocalDate;
 

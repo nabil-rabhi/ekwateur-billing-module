@@ -1,18 +1,10 @@
-/*
- *
- * Copyright (c) 2020 - Crédit Agricole Leasing & Factoring - All rights reserved
- * Unauthorized copying of this file, via any medium is strictly prohibited
- * This file can not be copied and/or distributed without the express permission of Crédit Agricole Leasing & Factoring
- *
- */
-
 package com.ekwateur.api.standards.configuration;
 
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 
 import com.ekwateur.api.standards.errors.handler.StandardExceptionHandler;
 
@@ -21,9 +13,10 @@ import com.ekwateur.api.standards.errors.handler.StandardExceptionHandler;
          CharsetEncodingConfiguration.class})
 public class RestApiStandardConfiguration {
 
+    @Order(Ordered.HIGHEST_PRECEDENCE)
     @Bean
-    @ConditionalOnMissingBean(annotation = ControllerAdvice.class)
-    StandardExceptionHandler exceptionHandler() {
+        //    @ConditionalOnMissingBean(annotation = ControllerAdvice.class)
+    StandardExceptionHandler standardExceptionHandler() {
 
         return new StandardExceptionHandler();
     }

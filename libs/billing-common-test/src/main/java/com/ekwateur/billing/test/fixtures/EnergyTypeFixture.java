@@ -18,6 +18,9 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class EnergyTypeFixture {
 
+    public static final LocalDate START_DATE = LocalDate.parse("2023-02-01", DateTimeFormatter.ISO_LOCAL_DATE);
+    public static final LocalDate END_DATE = LocalDate.parse("2023-02-28", DateTimeFormatter.ISO_LOCAL_DATE);
+
     private static final String REFERENCE_PREFIX = "EKW";
 
     public static final Customer INDIVIDUAL_CUSTOMER = IndividualCustomer.builder()
