@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.ekwateur.api.standards.configuration.RestApiStandardConfiguration
