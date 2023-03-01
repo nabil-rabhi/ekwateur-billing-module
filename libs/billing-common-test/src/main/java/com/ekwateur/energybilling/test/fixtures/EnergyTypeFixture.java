@@ -26,7 +26,7 @@ public class EnergyTypeFixture {
     private static final String REFERENCE_PREFIX = "EKW";
 
     public static final IndividualCustomer INDIVIDUAL_CUSTOMER = IndividualCustomer.builder()
-                                                                                   .reference(REFERENCE_PREFIX + "01234567")
+                                                                                   .reference(REFERENCE_PREFIX + "00000001")
                                                                                    .type(INDIVUDUAL)
                                                                                    .civility(Civility.MISS)
                                                                                    .firstName("Individual First Name")
@@ -34,7 +34,7 @@ public class EnergyTypeFixture {
                                                                                    .build();
 
     public static final ProCustomer PRO_CUSTOMER_WITH_REVENUE_HIGHER_THAN_ONE_MILLION = ProCustomer.builder()
-                                                                                                   .reference(REFERENCE_PREFIX + "11234567")
+                                                                                                   .reference(REFERENCE_PREFIX + "00000002")
                                                                                                    .type(PROFESSIONAl)
                                                                                                    .revenue(new Revenue(BigDecimal.valueOf(10_000_000)))
                                                                                                    .siret("siret 1")
@@ -42,7 +42,7 @@ public class EnergyTypeFixture {
                                                                                                    .build();
 
     public static final ProCustomer PRO_CUSTOMER_WITH_REVENUE_LOWER_THAN_ONE_MILLION = ProCustomer.builder()
-                                                                                                  .reference(REFERENCE_PREFIX + "21234567")
+                                                                                                  .reference(REFERENCE_PREFIX + "00000003")
                                                                                                   .type(PROFESSIONAl)
                                                                                                   .revenue(new Revenue(BigDecimal.valueOf(100_000)))
                                                                                                   .siret("siret 2")

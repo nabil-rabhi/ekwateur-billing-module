@@ -85,5 +85,13 @@ ekwateur-billing-module
 - Une fois toutes les applications ont été buildées, il suffit de lancer dans l'ordre
   - la classe **CustomerDataStoreApplication.java** qui démarre sur le port 8081
   - et enfin la classe **BillingApiApplication.java** pour démarrer l'application sur le port 8080
-
-  
+  - Pour tester l'application, avec postman, interrogez l'url <em>**http://localhost:8080/bills/{customer-reference}?startDate={start-date}&endDate={endDate}** </em>
+    - où:
+        - **customer-reference**: la référence du client, les valeurs possibles sont 
+          - **EKW00000001** pour un client particulier
+          - **EKW00000002** pour un client pro ayant un CA inférieur à 1 000 000 €
+          - **EKW00000003** pour un client pro ayant un CA supérieur à 1 000 000 €
+        - **start-date**: est la date de début de la période de facturation,
+        - **endDate**: est la date de fin de la période de facturation
+          - les dates doivent être au format **yyyy-MM-dd**, l'interval de date dans l'application est entre 2023-02-01 et 2023-02-28 
+  - Exemple: <em>**http://localhost:8080/bills/EKW00000001?startDate=2023-02-01&endDate=2023-02-28** </em>
