@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.ekwateur.energybilling.model.customer.Civility;
-import com.ekwateur.energybilling.model.customer.Customer;
 import com.ekwateur.energybilling.model.customer.IndividualCustomer;
 import com.ekwateur.energybilling.model.customer.ProCustomer;
 import com.ekwateur.energybilling.model.customer.Revenue;
@@ -23,26 +22,26 @@ public class EnergyTypeFixture {
 
     private static final String REFERENCE_PREFIX = "EKW";
 
-    public static final Customer INDIVIDUAL_CUSTOMER = IndividualCustomer.builder()
-                                                                         .reference(REFERENCE_PREFIX + "01234567")
-                                                                         .civility(Civility.MISS)
-                                                                         .firstName("Individual First Name")
-                                                                         .lastName("Individual Last Name")
-                                                                         .build();
+    public static final IndividualCustomer INDIVIDUAL_CUSTOMER = IndividualCustomer.builder()
+                                                                                   .reference(REFERENCE_PREFIX + "01234567")
+                                                                                   .civility(Civility.MISS)
+                                                                                   .firstName("Individual First Name")
+                                                                                   .lastName("Individual Last Name")
+                                                                                   .build();
 
-    public static final Customer PRO_CUSTOMER_WITH_REVENUE_HIGHER_THAN_ONE_MILLION = ProCustomer.builder()
-                                                                                                .reference(REFERENCE_PREFIX + "11234567")
-                                                                                                .revenue(new Revenue(BigDecimal.valueOf(10_000_000)))
-                                                                                                .siret("siret 1")
-                                                                                                .companyName("Company Name 1")
-                                                                                                .build();
+    public static final ProCustomer PRO_CUSTOMER_WITH_REVENUE_HIGHER_THAN_ONE_MILLION = ProCustomer.builder()
+                                                                                                   .reference(REFERENCE_PREFIX + "11234567")
+                                                                                                   .revenue(new Revenue(BigDecimal.valueOf(10_000_000)))
+                                                                                                   .siret("siret 1")
+                                                                                                   .companyName("Company Name 1")
+                                                                                                   .build();
 
-    public static final Customer PRO_CUSTOMER_WITH_REVENUE_LOWER_THAN_ONE_MILLION = ProCustomer.builder()
-                                                                                               .reference(REFERENCE_PREFIX + "21234567")
-                                                                                               .revenue(new Revenue(BigDecimal.valueOf(100_000)))
-                                                                                               .siret("siret 2")
-                                                                                               .companyName("Company Name 2")
-                                                                                               .build();
+    public static final ProCustomer PRO_CUSTOMER_WITH_REVENUE_LOWER_THAN_ONE_MILLION = ProCustomer.builder()
+                                                                                                  .reference(REFERENCE_PREFIX + "21234567")
+                                                                                                  .revenue(new Revenue(BigDecimal.valueOf(100_000)))
+                                                                                                  .siret("siret 2")
+                                                                                                  .companyName("Company Name 2")
+                                                                                                  .build();
 
     static {
         LocalDate startDate = LocalDate.parse("2023-02-01", DateTimeFormatter.ISO_LOCAL_DATE);

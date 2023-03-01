@@ -2,15 +2,19 @@ package com.ekwateur.energybilling.model.customer;
 
 import com.ekwateur.api.standards.resources.SnakeCaseable;
 
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-@Getter
 @SuperBuilder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public final class IndividualCustomer extends Customer implements SnakeCaseable {
 
-    private final Civility civility;
-    private final String firstName;
-    private final String lastName;
+    private Civility civility;
+    private String firstName;
+    private String lastName;
 
 }

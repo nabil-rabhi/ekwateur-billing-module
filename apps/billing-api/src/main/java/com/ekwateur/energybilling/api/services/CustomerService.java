@@ -18,7 +18,7 @@ public class CustomerService {
     public Optional<Customer> getCustomer(String customerReference) {
 
         Customer customer = customerWebClient.get()
-                                             .uri("/customers", customerReference)
+                                             .uri("/customers/{customer-reference}", customerReference)
                                              .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                                              .retrieve()
                                              .bodyToMono(Customer.class)

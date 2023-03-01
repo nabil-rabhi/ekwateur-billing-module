@@ -7,16 +7,29 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Predicate;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import jakarta.validation.constraints.Pattern;
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-@Getter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @SuperBuilder
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME,
+              property = "type")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = IndividualCustomer.class, name = "IndividualCustomer"),
+        @JsonSubTypes.Type(value = ProCustomer.class, name = "ProCustomer")
+})
 public sealed class Customer permits ProCustomer, IndividualCustomer {
 
     @Pattern(regexp = "^EKW(\\d{8})$")
-    protected final String reference;
+    protected String reference;
 
     private final Map<LocalDate, Long> electricityConsumptions = new ConcurrentHashMap<>();
     private final Map<LocalDate, Long> gasConsumptions = new ConcurrentHashMap<>();
