@@ -37,7 +37,53 @@ La seule contrainte technique est l'utilisation du langage Java dans sa version 
 ## Ce qui est attendu
 Le minimum attendu est un programme fonctionnel qui puisse etre executé et testé.
 
-## Comment soumettre ton travail
-- Créer un nouveau repository public sur un espace à toi (et non un fork de ce repo sur l'espace gitlab Ekwateur)
-- Rendre le projet sur la branche master de ton repository
-- Enfin, nous communiquer par mail le lien de ton repository quand l'exercice est terminé
+## Organisation du projet
+- Le projet suit une infrastructure en monorepo pour avoir tous les modules dans le même répo git
+- cette structure favorise le passage en architecutre microservices
+- la structure du projet est la suivante:
+```
+ekwateur-billing-module
+│   README.md
+└─apps
+│   └─ billing-api
+│   └─ customers-data-store
+└─libs
+│   └─ billing-dependencies
+│   └─ billing-model
+│   └─ rest-api-standards
+│   └─ billing-common-test
+─runConfigurations
+│   └─ 01__billing_dependencies__clean_install__U_.xml
+│   └─ 02_rest_api_standards__clean_install__U_.xml
+│   └─ 03_billing_model__clean_install__U_.xml
+│   └─ 04__common_test__clean_install__U_.xml
+│   └─ 05_customer_data_store__clean_install__U_.xml
+│   └─ 06_billing_api__clean_install__U_.xml
+```
+- **dossier apps**: contient les deux applications principales du projet 
+  - **billing-api**: c'est le point d'entrée du projet, contient les api nécessaires exposées pour calculer la facturation
+  - **customers-data-store**: comme son nom l'indique, c'est la couche d'accès aux données. elle est séparée de l'application de base afin de renforcer le découpage par domaine et renforcer le principe SRP 
+- **dossier libs**: contient les librairies partagées par les applications
+  - **billing-dependencies**: définit les dépendances maven du projet afin que tous les modules utilisent les mêmes versions
+  - **billing-model**: contient les modèles de données utilisés par les applications
+  - **rest-api-standards**: une librairie simple qui contient quelques implémentations en spring des standards REST
+  - **billing-common-test**: une librairie qui contient les classes de test communes aux applications
+ - **dossier runConfiguration**: contient les configurations maven pour builder chaque module du projet
+
+## Comment démarrer le projet
+- Pour démarrer le projet, il faut d'abord builder les librairies partagées du projet.
+ Pour ce faire, il faut exécuter les configurations maven suivantes dans l'ordre:
+  - 01__billing_dependencies__clean_install__U_.xml
+  - 02_rest_api_standards__clean_install__U_.xml
+  - 03_billing_model__clean_install__U_.xml
+  - 04__common_test__clean_install__U_.xml
+- Ensuite, il faut builder les applications:
+  - 05_customer_data_store__clean_install__U_.xml
+  - 06_billing_api__clean_install__U_.xml
+
+
+- Une fois les applications builder, il suffit de lancer dans l'ordre
+  - la classe **CustomerDataStoreApplication.java** qui démarre sur le port 8081
+  - et enfin la classe **BillingApiApplication.java** pour démarrer l'application sur le port 8080
+
+  
