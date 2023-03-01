@@ -9,8 +9,11 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import com.ekwateur.api.standards.errors.exceptions.ApiException;
 import com.ekwateur.api.standards.errors.exceptions.business.BusinessException;
+import com.ekwateur.api.standards.errors.exceptions.error.ApiError;
 import com.ekwateur.api.standards.errors.exceptions.technical.TechnicalException;
 
+import jakarta.validation.ConstraintViolationException;
+import jakarta.validation.ValidationException;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -40,6 +43,29 @@ public class StandardExceptionHandler extends ResponseEntityExceptionHandler {
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                              .body("An unhandled exception occurred " + exception.getMessage());
+    }
+
+    @ExceptionHandler(ValidationException.class)
+    public ResponseEntity<ApiError> handleValidationException(ValidationException exception) {
+
+        log.error("A validation exception occurred:\n" + exception.getMessage(), exception);
+
+        String description = "";
+
+        if (exception instanceof ConstraintViolationException ex) {
+            description = ex.getConstraintViolations()
+                            .stream()
+                            .findFirst()
+                            .map(constraintViolation -> "[%s] %s".formatted(constraintViolation.getInvalidValue(), constraintViolation.getMessage()))
+                            .orElse("");
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                             .body(ApiError.builder()
+                                           .code("VALIDATION_ERROR")
+                                           .label("Incorrect Parameter value")
+                                           .description(description)
+                                           .build());
+
     }
 
     private ResponseEntity<Object> buildResponseEntity(ApiException exception) {

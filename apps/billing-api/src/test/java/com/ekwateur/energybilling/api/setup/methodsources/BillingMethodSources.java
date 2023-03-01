@@ -4,7 +4,7 @@ import static com.ekwateur.energybilling.model.energy.utils.AmountUtil.round;
 import static com.ekwateur.energybilling.test.fixtures.EnergyTypeFixture.END_DATE;
 import static com.ekwateur.energybilling.test.fixtures.EnergyTypeFixture.INDIVIDUAL_CUSTOMER;
 import static com.ekwateur.energybilling.test.fixtures.EnergyTypeFixture.PRO_CUSTOMER_WITH_REVENUE_HIGHER_THAN_ONE_MILLION;
-import static com.ekwateur.energybilling.test.fixtures.EnergyTypeFixture.PRO_CUSTOMER_WITH_REVENUE_LESSER_THAN_ONE_MILLION;
+import static com.ekwateur.energybilling.test.fixtures.EnergyTypeFixture.PRO_CUSTOMER_WITH_REVENUE_LOWER_THAN_ONE_MILLION;
 import static com.ekwateur.energybilling.test.fixtures.EnergyTypeFixture.START_DATE;
 
 import java.util.List;
@@ -17,8 +17,6 @@ import com.ekwateur.energybilling.api.setup.scenarios.BillingServiceScenario;
 import com.ekwateur.energybilling.model.bill.Amount;
 import com.ekwateur.energybilling.model.bill.Bill;
 import com.ekwateur.energybilling.model.bill.Consumption;
-import com.ekwateur.energybilling.model.customer.IndividualCustomer;
-import com.ekwateur.energybilling.model.customer.ProCustomer;
 
 import lombok.experimental.UtilityClass;
 
@@ -38,17 +36,17 @@ public class BillingMethodSources {
                                                                      .build())
                                              .build();
 
-    private final Bill BILL_FOR_PRO_WITH_REVENUE_LESS_THAN_ONE_MILLION = Bill.builder()
-                                                                             .customerReference(PRO_CUSTOMER_WITH_REVENUE_LESSER_THAN_ONE_MILLION.getReference())
-                                                                             .amount(Amount.builder()
-                                                                                           .electricityAmount(round(3.19))
-                                                                                           .gasAmount(round(3.05))
-                                                                                           .build())
-                                                                             .consumption(Consumption.builder()
-                                                                                                     .electricity(27)
-                                                                                                     .gas(27)
-                                                                                                     .build())
-                                                                             .build();
+    private final Bill BILL_FOR_PRO_WITH_REVENUE_LOWER_THAN_ONE_MILLION = Bill.builder()
+                                                                              .customerReference(PRO_CUSTOMER_WITH_REVENUE_LOWER_THAN_ONE_MILLION.getReference())
+                                                                              .amount(Amount.builder()
+                                                                                            .electricityAmount(round(3.19))
+                                                                                            .gasAmount(round(3.05))
+                                                                                            .build())
+                                                                              .consumption(Consumption.builder()
+                                                                                                      .electricity(27)
+                                                                                                      .gas(27)
+                                                                                                      .build())
+                                                                              .build();
 
     private final Bill BILL_FOR_PRO_WITH_REVENUE_HIGHER_THAN_ONE_MILLION = Bill.builder()
                                                                                .customerReference(PRO_CUSTOMER_WITH_REVENUE_HIGHER_THAN_ONE_MILLION.getReference())
@@ -74,10 +72,10 @@ public class BillingMethodSources {
                                       .build(),
                 BillingServiceScenario.builder()
                                       .description("cas d'un client pro ayant un chiffre d'affaire <1_000_000")
-                                      .customer(PRO_CUSTOMER_WITH_REVENUE_LESSER_THAN_ONE_MILLION)
+                                      .customer(PRO_CUSTOMER_WITH_REVENUE_LOWER_THAN_ONE_MILLION)
                                       .startDate(START_DATE)
                                       .endDate(END_DATE)
-                                      .expectedBill(BILL_FOR_PRO_WITH_REVENUE_LESS_THAN_ONE_MILLION)
+                                      .expectedBill(BILL_FOR_PRO_WITH_REVENUE_LOWER_THAN_ONE_MILLION)
                                       .build(),
                 BillingServiceScenario.builder()
                                       .description("cas d'un client pro ayant un chiffre d'affaire >=1_000_000")
@@ -91,39 +89,37 @@ public class BillingMethodSources {
 
     public static List<BillingApiScenario> billingApiNominalScenarios() {
 
+        ConsumptionRange consumptionRange = ConsumptionRange.builder()
+                                                            .startDate(START_DATE)
+                                                            .endDate(END_DATE)
+                                                            .build();
         return List.of(
                 BillingApiScenario.builder()
                                   .description("cas d'un client particulier")
                                   .customerReference(INDIVIDUAL_CUSTOMER.getReference())
-                                  .customerType(IndividualCustomer.class)
-                                  .consumptionRange(ConsumptionRange.builder()
-                                                                    .startDate(START_DATE)
-                                                                    .endDate(END_DATE)
-                                                                    .build())
+                                  .customer(INDIVIDUAL_CUSTOMER)
+                                  .consumptionRange(consumptionRange)
                                   .expectedHttpStatus(HttpStatus.OK)
-                                  .expectedJsonResponseFile("")
+                                  .expetedBill(INDIVIDUAL_BILL)
+                                  .expectedJsonResponseFilePath("billing_api/ok_scenarios/billing_api_individual_response.json")
                                   .build(),
                 BillingApiScenario.builder()
                                   .description("cas d'un client pro ayant un chiffre d'affaire <1_000_000")
-                                  .customerReference(PRO_CUSTOMER_WITH_REVENUE_LESSER_THAN_ONE_MILLION.getReference())
-                                  .customerType(ProCustomer.class)
-                                  .consumptionRange(ConsumptionRange.builder()
-                                                                    .startDate(START_DATE)
-                                                                    .endDate(END_DATE)
-                                                                    .build())
+                                  .customerReference(PRO_CUSTOMER_WITH_REVENUE_LOWER_THAN_ONE_MILLION.getReference())
+                                  .customer(PRO_CUSTOMER_WITH_REVENUE_LOWER_THAN_ONE_MILLION)
+                                  .consumptionRange(consumptionRange)
                                   .expectedHttpStatus(HttpStatus.OK)
-                                  .expectedJsonResponseFile("")
+                                  .expetedBill(BILL_FOR_PRO_WITH_REVENUE_LOWER_THAN_ONE_MILLION)
+                                  .expectedJsonResponseFilePath("billing_api/ok_scenarios/billing_api_pro_with_revenue_lower_than_one_million_response.json")
                                   .build(),
                 BillingApiScenario.builder()
                                   .description("cas d'un client pro ayant un chiffre d'affaire >=1_000_000")
                                   .customerReference(PRO_CUSTOMER_WITH_REVENUE_HIGHER_THAN_ONE_MILLION.getReference())
-                                  .customerType(ProCustomer.class)
-                                  .consumptionRange(ConsumptionRange.builder()
-                                                                    .startDate(START_DATE)
-                                                                    .endDate(END_DATE)
-                                                                    .build())
+                                  .customer(PRO_CUSTOMER_WITH_REVENUE_HIGHER_THAN_ONE_MILLION)
+                                  .consumptionRange(consumptionRange)
                                   .expectedHttpStatus(HttpStatus.OK)
-                                  .expectedJsonResponseFile("")
+                                  .expetedBill(BILL_FOR_PRO_WITH_REVENUE_HIGHER_THAN_ONE_MILLION)
+                                  .expectedJsonResponseFilePath("billing_api/ok_scenarios/billing_api_pro_with_revenue_higher_than_one_million_response.json")
                                   .build()
         );
     }
@@ -132,26 +128,15 @@ public class BillingMethodSources {
 
         return List.of(
                 BillingApiScenario.builder()
-                                  .description("cas d'une référence client nulle")
-                                  .customerReference(null)
-                                  .customerType(IndividualCustomer.class)
-                                  .consumptionRange(ConsumptionRange.builder()
-                                                                    .startDate(START_DATE)
-                                                                    .endDate(END_DATE)
-                                                                    .build())
-                                  .expectedHttpStatus(HttpStatus.NOT_FOUND)
-                                  .expectedJsonResponseFile("")
-                                  .build(),
-                BillingApiScenario.builder()
                                   .description("cas d'une référence non conforme à la règle de nommage")
                                   .customerReference("some incorrect customer reference ")
-                                  .customerType(ProCustomer.class)
+                                  .customer(null)
                                   .consumptionRange(ConsumptionRange.builder()
                                                                     .startDate(START_DATE)
                                                                     .endDate(END_DATE)
                                                                     .build())
-                                  .expectedHttpStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-                                  .expectedJsonResponseFile("")
+                                  .expectedHttpStatus(HttpStatus.BAD_REQUEST)
+                                  .expectedJsonResponseFilePath("billing_api/ko_scenarios/billing_api_incorrect_reference_response.json")
                                   .build(),
                 BillingApiScenario.builder()
                                   .description("cas où [startDate] est null && [endDate] est null")
@@ -160,9 +145,9 @@ public class BillingMethodSources {
                                                                     .endDate(null)
                                                                     .build())
                                   .customerReference(PRO_CUSTOMER_WITH_REVENUE_HIGHER_THAN_ONE_MILLION.getReference())
-                                  .customerType(ProCustomer.class)
+                                  .customer(null)
                                   .expectedHttpStatus(HttpStatus.BAD_REQUEST)
-                                  .expectedJsonResponseFile("")
+                                  .expectedJsonResponseFilePath("billing_api/ko_scenarios/billing_api_both_dates_are_null_response.json")
                                   .build(),
                 BillingApiScenario.builder()
                                   .description("cas où [startDate] est null && [endDate] n'est pas null")
@@ -171,9 +156,9 @@ public class BillingMethodSources {
                                                                     .endDate(END_DATE)
                                                                     .build())
                                   .customerReference(PRO_CUSTOMER_WITH_REVENUE_HIGHER_THAN_ONE_MILLION.getReference())
-                                  .customerType(ProCustomer.class)
+                                  .customer(null)
                                   .expectedHttpStatus(HttpStatus.BAD_REQUEST)
-                                  .expectedJsonResponseFile("")
+                                  .expectedJsonResponseFilePath("billing_api/ko_scenarios/billing_api_start_date_is_null_response.json")
                                   .build(),
                 BillingApiScenario.builder()
                                   .description("cas où [startDate] n'est pas null && [endDate] est null")
@@ -182,9 +167,9 @@ public class BillingMethodSources {
                                                                     .endDate(null)
                                                                     .build())
                                   .customerReference(PRO_CUSTOMER_WITH_REVENUE_HIGHER_THAN_ONE_MILLION.getReference())
-                                  .customerType(ProCustomer.class)
+                                  .customer(null)
                                   .expectedHttpStatus(HttpStatus.BAD_REQUEST)
-                                  .expectedJsonResponseFile("")
+                                  .expectedJsonResponseFilePath("billing_api/ko_scenarios/billing_api_end_date_is_null_response.json")
                                   .build(),
                 BillingApiScenario.builder()
                                   .description("cas où [startDate] n'est pas null && [endDate] n'est pas null && startDate est après endDate")
@@ -193,9 +178,9 @@ public class BillingMethodSources {
                                                                     .endDate(START_DATE)
                                                                     .build())
                                   .customerReference(PRO_CUSTOMER_WITH_REVENUE_HIGHER_THAN_ONE_MILLION.getReference())
-                                  .customerType(ProCustomer.class)
+                                  .customer(null)
                                   .expectedHttpStatus(HttpStatus.BAD_REQUEST)
-                                  .expectedJsonResponseFile("")
+                                  .expectedJsonResponseFilePath("billing_api/ko_scenarios/billing_api_date_range_incorrect_response.json")
                                   .build()
 
         );

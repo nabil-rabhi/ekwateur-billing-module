@@ -20,7 +20,7 @@ class BillingServiceTest {
     }
 
     @ScenarioParameterizedTest
-    @MethodSource("com.ekwateur.billing.api.setup.methodsources.BillingMethodSources#billingServiceScenarios")
+    @MethodSource("com.ekwateur.energybilling.api.setup.methodsources.BillingMethodSources#billingServiceScenarios")
     void getBill_should_return_expected_result(BillingServiceScenario scenario) {
 
         //when

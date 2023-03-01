@@ -10,7 +10,7 @@
         <module name="billing-model (1)" />
         <module name="billing-common-test" />
       </profile>
-      <profile name="Annotation profile for billing-model" enabled="true">
+      <profile name="Annotation profile for billing-common-test" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />

@@ -37,12 +37,12 @@ public class EnergyTypeFixture {
                                                                                                 .companyName("Company Name 1")
                                                                                                 .build();
 
-    public static final Customer PRO_CUSTOMER_WITH_REVENUE_LESSER_THAN_ONE_MILLION = ProCustomer.builder()
-                                                                                                .reference(REFERENCE_PREFIX + "21234567")
-                                                                                                .revenue(new Revenue(BigDecimal.valueOf(100_000)))
-                                                                                                .siret("siret 2")
-                                                                                                .companyName("Company Name 2")
-                                                                                                .build();
+    public static final Customer PRO_CUSTOMER_WITH_REVENUE_LOWER_THAN_ONE_MILLION = ProCustomer.builder()
+                                                                                               .reference(REFERENCE_PREFIX + "21234567")
+                                                                                               .revenue(new Revenue(BigDecimal.valueOf(100_000)))
+                                                                                               .siret("siret 2")
+                                                                                               .companyName("Company Name 2")
+                                                                                               .build();
 
     static {
         LocalDate startDate = LocalDate.parse("2023-02-01", DateTimeFormatter.ISO_LOCAL_DATE);
@@ -80,8 +80,8 @@ public class EnergyTypeFixture {
         someEnergyConsumptions.forEach(INDIVIDUAL_CUSTOMER::addElectricityConsumption);
         someEnergyConsumptions.forEach(INDIVIDUAL_CUSTOMER::addGasConsumption);
 
-        someEnergyConsumptions.forEach(PRO_CUSTOMER_WITH_REVENUE_LESSER_THAN_ONE_MILLION::addElectricityConsumption);
-        someEnergyConsumptions.forEach(PRO_CUSTOMER_WITH_REVENUE_LESSER_THAN_ONE_MILLION::addGasConsumption);
+        someEnergyConsumptions.forEach(PRO_CUSTOMER_WITH_REVENUE_LOWER_THAN_ONE_MILLION::addElectricityConsumption);
+        someEnergyConsumptions.forEach(PRO_CUSTOMER_WITH_REVENUE_LOWER_THAN_ONE_MILLION::addGasConsumption);
 
         someEnergyConsumptions.forEach(PRO_CUSTOMER_WITH_REVENUE_HIGHER_THAN_ONE_MILLION::addElectricityConsumption);
         someEnergyConsumptions.forEach(PRO_CUSTOMER_WITH_REVENUE_HIGHER_THAN_ONE_MILLION::addGasConsumption);

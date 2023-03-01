@@ -1,0 +1,5 @@
+{
+  "code": "EKW_400",
+  "label": "Missing parameter",
+  "description": "the mandatory parameter [startDate] is eiher missing or null"
+}

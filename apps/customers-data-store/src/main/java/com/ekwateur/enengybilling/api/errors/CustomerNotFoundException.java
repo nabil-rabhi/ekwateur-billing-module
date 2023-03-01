@@ -5,7 +5,7 @@ import static com.ekwateur.api.standards.errors.ErrorCodes.RESOURCE_NOT_FOUND;
 import org.springframework.http.HttpStatus;
 
 import com.ekwateur.api.standards.errors.exceptions.business.BusinessException;
-import com.ekwateur.api.standards.errors.exceptions.error.Error;
+import com.ekwateur.api.standards.errors.exceptions.error.ApiError;
 
 public class CustomerNotFoundException extends BusinessException {
 
@@ -17,13 +17,13 @@ public class CustomerNotFoundException extends BusinessException {
     }
 
     @Override
-    public Error getError() {
+    public ApiError getError() {
 
-        return Error.builder()
-                    .code(RESOURCE_NOT_FOUND.getCode())
-                    .label(RESOURCE_NOT_FOUND.getLabel())
-                    .description(getMessage())
-                    .build();
+        return ApiError.builder()
+                       .code(RESOURCE_NOT_FOUND.getCode())
+                       .label(RESOURCE_NOT_FOUND.getLabel())
+                       .description(getMessage())
+                       .build();
 
     }
 

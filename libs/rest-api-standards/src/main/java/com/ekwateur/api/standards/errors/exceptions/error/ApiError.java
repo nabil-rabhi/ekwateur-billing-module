@@ -5,7 +5,7 @@ import java.io.Serializable;
 import lombok.Builder;
 
 @Builder
-public record Error(
+public record ApiError(
 
         String code,
         String label,

@@ -15,11 +15,11 @@ public class Functions {
 
     private static final double ELECTRICITY_KWH_UNIT_PRICE_FOR_INDIVIDUALS = 0.121;
     private static final double ELECTRICITY_KWH_UNIT_PRICE_FOR_PRO_WITH_REVENUE_GREATER_THAN_ONE_MILLION = 0.114;
-    private static final double ELECTRICITY_KWH_UNIT_PRICE_FOR_PRO_WITH_REVENUE_LESS_THAN_ONE_MILLION = 0.118;
+    private static final double ELECTRICITY_KWH_UNIT_PRICE_FOR_PRO_WITH_REVENUE_LOWER_THAN_ONE_MILLION = 0.118;
 
     private static final double GAS_KWH_UNIT_PRICE_FOR_INDIVIDUALS = 0.115;
     private static final double GAS_KWH_UNIT_PRICE_FOR_PRO_WITH_REVENUE_GREATER_THAN_ONE_MILLION = 0.111;
-    private static final double GAS_KWH_UNIT_PRICE_FOR_PRO_WITH_REVENUE_LESS_THAN_ONE_MILLION = 0.113;
+    private static final double GAS_KWH_UNIT_PRICE_FOR_PRO_WITH_REVENUE_LOWER_THAN_ONE_MILLION = 0.113;
 
     private static final Long ONE_MILLION = 1_000_000L;
 
@@ -32,7 +32,7 @@ public class Functions {
                     Long electricityConsumption = proCustomer.getElectricityConsumption(startDate, endDate);
                     yield proCustomer.getRevenue().isGreaterThan(ONE_MILLION) ?
                             round(electricityConsumption * ELECTRICITY_KWH_UNIT_PRICE_FOR_PRO_WITH_REVENUE_GREATER_THAN_ONE_MILLION) :
-                            round(electricityConsumption * ELECTRICITY_KWH_UNIT_PRICE_FOR_PRO_WITH_REVENUE_LESS_THAN_ONE_MILLION);
+                            round(electricityConsumption * ELECTRICITY_KWH_UNIT_PRICE_FOR_PRO_WITH_REVENUE_LOWER_THAN_ONE_MILLION);
                 }
                 case null -> throw new IllegalArgumentException("Customer should be not null");
                 default -> throw new IllegalArgumentException("customer type is not supported yet");
@@ -47,7 +47,7 @@ public class Functions {
                     Long gasConsumption = proCustomer.getGasConsumption(startDate, endDate);
                     yield proCustomer.getRevenue().isGreaterThan(ONE_MILLION) ?
                             round(gasConsumption * GAS_KWH_UNIT_PRICE_FOR_PRO_WITH_REVENUE_GREATER_THAN_ONE_MILLION) :
-                            round(gasConsumption * GAS_KWH_UNIT_PRICE_FOR_PRO_WITH_REVENUE_LESS_THAN_ONE_MILLION);
+                            round(gasConsumption * GAS_KWH_UNIT_PRICE_FOR_PRO_WITH_REVENUE_LOWER_THAN_ONE_MILLION);
                 }
                 case null -> throw new IllegalArgumentException("Customer should be not null");
                 default -> throw new IllegalArgumentException("customer type is not supported yet");

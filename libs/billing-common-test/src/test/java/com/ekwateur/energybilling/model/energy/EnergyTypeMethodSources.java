@@ -38,7 +38,7 @@ public class EnergyTypeMethodSources {
                                   .build(),
                 EnergyTypeScenario.builder()
                                   .description("Elecrticité - cas d'un client pro ayant un chiffre d'affaire <1_000_000")
-                                  .customer(EnergyTypeFixture.PRO_CUSTOMER_WITH_REVENUE_LESSER_THAN_ONE_MILLION)
+                                  .customer(EnergyTypeFixture.PRO_CUSTOMER_WITH_REVENUE_LOWER_THAN_ONE_MILLION)
                                   .energyType(EnergyType.ELECTRICITY)
                                   .startDate(START_DATE)
                                   .endDate(END_DATE)
@@ -69,7 +69,7 @@ public class EnergyTypeMethodSources {
 
                 EnergyTypeScenario.builder()
                                   .description("Gaz - cas d'un client pro ayant un chiffre d'affaire <1_000_000")
-                                  .customer(EnergyTypeFixture.PRO_CUSTOMER_WITH_REVENUE_LESSER_THAN_ONE_MILLION)
+                                  .customer(EnergyTypeFixture.PRO_CUSTOMER_WITH_REVENUE_LOWER_THAN_ONE_MILLION)
                                   .energyType(EnergyType.GAS)
                                   .startDate(START_DATE)
                                   .endDate(END_DATE)

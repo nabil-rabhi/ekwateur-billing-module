@@ -44,7 +44,7 @@ public class JsonAssert extends AbstractAssert<JsonAssert, String> {
         String expectedPrettyPrintedJson = prettyPrint(jsonFileContent);
 
         if (!actualPrettyPrintedJson.equals(expectedPrettyPrintedJson)) {
-            failWithMessage("Expected Json response to be %s but was %s",
+            failWithMessage("Expected Json response to be\n %s \nbut was\n %s",
                             expectedPrettyPrintedJson, actualPrettyPrintedJson);
         }
         return this;

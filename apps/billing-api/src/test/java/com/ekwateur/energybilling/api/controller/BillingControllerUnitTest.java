@@ -4,7 +4,6 @@ import static com.ekwateur.energybilling.test.fixtures.EnergyTypeFixture.END_DAT
 import static com.ekwateur.energybilling.test.fixtures.EnergyTypeFixture.INDIVIDUAL_CUSTOMER;
 import static com.ekwateur.energybilling.test.fixtures.EnergyTypeFixture.START_DATE;
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
@@ -55,35 +54,13 @@ class BillingControllerUnitTest {
 
     @SneakyThrows
     @ScenarioParameterizedTest
-    @MethodSource("com.ekwateur.energybilling.api.setup.methodsources.BillingMethodSources#billingApiErrorScenarios")
-    void getBill_should_return_expected_error_result_according_to_the_error_scenario(BillingApiScenario scenario) {
-
-        //given
-        String effectiveUrl = UriComponentsBuilder.fromPath(URL_TEMPLATE)
-                                                  .buildAndExpand(scenario.getCustomerReference(),
-                                                                  scenario.getConsumptionRange().startDate(),
-                                                                  scenario.getConsumptionRange().endDate())
-                                                  .toUriString();
-        //when -then
-        mockMvc.perform(get(effectiveUrl))
-               .andDo(print())
-               .andExpect(status().is(scenario.getExpectedHttpStatus().value()))
-               .andExpect(content().encoding(UTF_8))
-               .andReturn();
-
-        verifyNoInteractions(customerService);
-        verifyNoInteractions(billingService);
-    }
-
-    @SneakyThrows
-    @ScenarioParameterizedTest
     @MethodSource("com.ekwateur.energybilling.api.setup.methodsources.BillingMethodSources#billingApiNominalScenarios")
     void getBill_should_return_expected_result_according_to_the_nominal_scenario(BillingApiScenario scenario) {
 
         //given
         String customerReference = scenario.getCustomerReference();
 
-        Customer customer = mock(scenario.getCustomerType());
+        Customer customer = scenario.getCustomer();
         Optional<Customer> optionalCustomer = Optional.of(customer);
 
         when(customerService.getCustomer(customerReference)).thenReturn(optionalCustomer);
@@ -103,6 +80,28 @@ class BillingControllerUnitTest {
         verify(customerService).getCustomer(customerReference);
         verify(billingService).getBill(customer, scenario.getConsumptionRange().startDate(), scenario.getConsumptionRange().endDate());
 
+    }
+
+    @SneakyThrows
+    @ScenarioParameterizedTest
+    @MethodSource("com.ekwateur.energybilling.api.setup.methodsources.BillingMethodSources#billingApiErrorScenarios")
+    void getBill_should_return_expected_error_result_according_to_the_error_scenario(BillingApiScenario scenario) {
+
+        //given
+        String effectiveUrl = UriComponentsBuilder.fromPath(URL_TEMPLATE)
+                                                  .buildAndExpand(scenario.getCustomerReference(),
+                                                                  scenario.getConsumptionRange().startDate(),
+                                                                  scenario.getConsumptionRange().endDate())
+                                                  .toUriString();
+        //when -then
+        mockMvc.perform(get(effectiveUrl))
+               .andDo(print())
+               .andExpect(status().is(scenario.getExpectedHttpStatus().value()))
+               .andExpect(content().encoding(UTF_8))
+               .andReturn();
+
+        verifyNoInteractions(customerService);
+        verifyNoInteractions(billingService);
     }
 
     @SneakyThrows

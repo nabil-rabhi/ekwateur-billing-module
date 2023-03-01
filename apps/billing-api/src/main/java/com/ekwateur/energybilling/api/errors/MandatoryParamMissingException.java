@@ -5,7 +5,7 @@ import static com.ekwateur.api.standards.errors.ErrorCodes.MISSING_PARAMETER;
 import org.springframework.http.HttpStatus;
 
 import com.ekwateur.api.standards.errors.exceptions.business.BusinessException;
-import com.ekwateur.api.standards.errors.exceptions.error.Error;
+import com.ekwateur.api.standards.errors.exceptions.error.ApiError;
 
 public class MandatoryParamMissingException extends BusinessException {
 
@@ -15,13 +15,13 @@ public class MandatoryParamMissingException extends BusinessException {
     }
 
     @Override
-    public Error getError() {
+    public ApiError getError() {
 
-        return Error.builder()
-                    .code(MISSING_PARAMETER.getCode())
-                    .label(MISSING_PARAMETER.getLabel())
-                    .description(getMessage())
-                    .build();
+        return ApiError.builder()
+                       .code(MISSING_PARAMETER.getCode())
+                       .label(MISSING_PARAMETER.getLabel())
+                       .description(getMessage())
+                       .build();
     }
 
     @Override

@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import org.springframework.http.HttpStatus;
 
 import com.ekwateur.api.standards.errors.exceptions.business.BusinessException;
-import com.ekwateur.api.standards.errors.exceptions.error.Error;
+import com.ekwateur.api.standards.errors.exceptions.error.ApiError;
 
 public class InvalidDateRangeException extends BusinessException {
 
@@ -18,13 +18,13 @@ public class InvalidDateRangeException extends BusinessException {
     }
 
     @Override
-    public Error getError() {
+    public ApiError getError() {
 
-        return Error.builder()
-                    .code(BAD_PARAMETERS_COMBINATION.getCode())
-                    .label(BAD_PARAMETERS_COMBINATION.getLabel())
-                    .description(getMessage())
-                    .build();
+        return ApiError.builder()
+                       .code(BAD_PARAMETERS_COMBINATION.getCode())
+                       .label(BAD_PARAMETERS_COMBINATION.getLabel())
+                       .description(getMessage())
+                       .build();
     }
 
     @Override

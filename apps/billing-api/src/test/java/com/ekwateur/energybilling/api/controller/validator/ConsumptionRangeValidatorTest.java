@@ -18,14 +18,13 @@ class ConsumptionRangeValidatorTest {
     }
 
     @ScenarioParameterizedTest
-    @MethodSource("com.ekwateur.billing.api.setup.methodsources.ConsumptionRangeMethodSources#consumptionRangeScenarios")
+    @MethodSource("com.ekwateur.energybilling.api.setup.methodsources.ConsumptionRangeMethodSources#consumptionRangeScenarios")
     void validate_should_throw_an_exception_when_input_is_invalid(ConsumptionRangeScenario scenario) {
 
         //when -then
         Assertions.assertThatExceptionOfType(scenario.getExpectedException().getClass())
                   .isThrownBy(() -> consumptionRangeValidator.validate(scenario.getConsumptionRange()))
-                  .withMessage(scenario.getExpectedException().getMessage())
-        ;
+                  .withMessage(scenario.getExpectedException().getMessage());
     }
 
 }

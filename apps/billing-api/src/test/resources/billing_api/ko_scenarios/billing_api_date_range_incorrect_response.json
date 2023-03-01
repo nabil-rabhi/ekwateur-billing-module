@@ -1,0 +1,5 @@
+{
+  "code": "EKW_400",
+  "label": "Bad Parameters combination",
+  "description": "the date range is incorrect, start date [2023-02-28] is after end date [2023-02-01]"
+}

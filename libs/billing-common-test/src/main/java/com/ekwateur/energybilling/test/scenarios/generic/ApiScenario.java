@@ -9,7 +9,7 @@ import lombok.experimental.SuperBuilder;
 @Getter
 public class ApiScenario extends Scenario {
 
-    private final String expectedJsonResponseFile;
+    private final String expectedJsonResponseFilePath;
     private final HttpStatus expectedHttpStatus;
 
 }

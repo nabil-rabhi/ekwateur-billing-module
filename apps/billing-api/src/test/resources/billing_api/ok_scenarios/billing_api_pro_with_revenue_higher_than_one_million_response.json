@@ -1,0 +1,11 @@
+{
+  "customer_reference": "EKW11234567",
+  "amount": {
+    "electricity_amount": 3.08,
+    "gas_amount": 3.0
+  },
+  "consumption": {
+    "gas": 27,
+    "electricity": 27
+  }
+}

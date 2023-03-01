@@ -1,0 +1,5 @@
+{
+  "code": "VALIDATION_ERROR",
+  "label": "Incorrect Parameter value",
+  "description": "[some incorrect customer reference ] must match \"^EKW(\\d{8})$\""
+}

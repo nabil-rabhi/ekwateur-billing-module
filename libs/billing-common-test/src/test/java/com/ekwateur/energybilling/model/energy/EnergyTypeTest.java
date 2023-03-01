@@ -13,7 +13,7 @@ import com.ekwateur.energybilling.test.scenarios.specific.EnergyTypeScenario;
 class EnergyTypeTest {
 
     @ScenarioParameterizedTest
-    @MethodSource("com.ekwateur.billing.model.energy.EnergyTypeMethodSources#amountPerEnergyTypeScenarios")
+    @MethodSource("com.ekwateur.energybilling.model.energy.EnergyTypeMethodSources#amountPerEnergyTypeScenarios")
     void getBillingAmount_should_return_expected_result(EnergyTypeScenario scenario) {
 
         //given
