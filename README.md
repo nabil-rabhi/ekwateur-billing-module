@@ -68,7 +68,13 @@ ekwateur-billing-module
   - **billing-model**: contient les modèles de données utilisés par les applications
   - **rest-api-standards**: une librairie simple qui contient quelques implémentations en spring des standards REST
   - **billing-common-test**: une librairie qui contient les classes de test communes aux applications
- - **dossier runConfiguration**: contient les configurations maven pour builder chaque module du projet
+ - **dossier runConfiguration**: contient les configurations maven pour builder chaque module du projet.
+    
+    Vous pouvez copier son contenu dans le dossier .idea/runConfigurations de votre projet
+pour pouvoir lancer les configurations maven depuis IntelliJ
+## NB:
+- le projet utilise la version 19 de java en activant les fonctionnalités preveiews, pour cela, il faut ajouter 
+  - **--enable-preview** dans les paramètres de la JVM dans IntelliJ
 
 ## Comment démarrer le projet
 - Pour démarrer le projet, il faut d'abord builder les librairies partagées du projet.
