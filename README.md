@@ -82,7 +82,7 @@ ekwateur-billing-module
   - 06_billing_api__clean_install__U_.xml
 
 
-- Une fois les applications builder, il suffit de lancer dans l'ordre
+- Une fois toutes les applications ont été buildées, il suffit de lancer dans l'ordre
   - la classe **CustomerDataStoreApplication.java** qui démarre sur le port 8081
   - et enfin la classe **BillingApiApplication.java** pour démarrer l'application sur le port 8080
 
