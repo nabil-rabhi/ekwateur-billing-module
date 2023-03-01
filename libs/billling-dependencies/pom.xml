@@ -23,7 +23,8 @@
         <junit-platform-runner.version>1.9.2</junit-platform-runner.version>
         <jakarta.validation-api.version>3.0.2</jakarta.validation-api.version>
         <guava.version>31.1-jre</guava.version>
-
+        <mockserver.version>5.15.0</mockserver.version>
+        <commons-io.version>2.11.0</commons-io.version>
     </properties>
 
     <dependencyManagement>
@@ -55,7 +56,6 @@
                 <optional>true</optional>
             </dependency>
 
-
             <dependency>
                 <groupId>org.springdoc</groupId>
                 <artifactId>springdoc-openapi-ui</artifactId>
@@ -81,6 +81,18 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-test</artifactId>
                 <version>${spring-boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mock-server</groupId>
+                <artifactId>mockserver-spring-test-listener</artifactId>
+                <version>${mockserver.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mock-server</groupId>
+                <artifactId>mockserver-client-java</artifactId>
+                <version>${mockserver.version}</version>
             </dependency>
 
             <dependency>
@@ -130,6 +142,12 @@
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io.version}</version>
             </dependency>
 
         </dependencies>

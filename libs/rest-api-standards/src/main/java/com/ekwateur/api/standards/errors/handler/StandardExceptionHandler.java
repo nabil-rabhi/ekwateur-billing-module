@@ -28,7 +28,7 @@ public class StandardExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(BusinessException.class)
     public ResponseEntity<Object> handleBusinessException(BusinessException exception) {
 
-        log.error("A business error occurred" + exception.getMessage(), exception);
+        log.error("A business error occurred:\n" + exception.getMessage(), exception);
         return buildResponseEntity(exception);
     }
 
@@ -36,7 +36,7 @@ public class StandardExceptionHandler extends ResponseEntityExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ResponseEntity<Object> handleThrowable(Throwable exception) {
 
-        log.error("An unhandled exception occurred " + exception.getMessage(), exception);
+        log.error("An unhandled exception occurred:\n" + exception.getMessage(), exception);
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                              .body("An unhandled exception occurred " + exception.getMessage());

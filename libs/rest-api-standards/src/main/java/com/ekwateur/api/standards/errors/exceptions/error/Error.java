@@ -8,8 +8,8 @@ import lombok.Builder;
 public record Error(
 
         String code,
-        String description,
-        String label
+        String label,
+        String description
 )
         implements Serializable {
 
