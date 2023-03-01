@@ -4,9 +4,8 @@ import static com.ekwateur.energybilling.test.fixtures.EnergyTypeFixture.INDIVID
 import static com.ekwateur.energybilling.test.fixtures.EnergyTypeFixture.PRO_CUSTOMER_WITH_REVENUE_HIGHER_THAN_ONE_MILLION;
 import static com.ekwateur.energybilling.test.fixtures.EnergyTypeFixture.PRO_CUSTOMER_WITH_REVENUE_LESSER_THAN_ONE_MILLION;
 
+import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
-import java.util.concurrent.ConcurrentHashMap;
 
 import com.ekwateur.energybilling.model.customer.Customer;
 
@@ -14,7 +13,7 @@ import jakarta.annotation.PostConstruct;
 
 public class CustomerRepository {
 
-    private final Map<String, Customer> customers = new ConcurrentHashMap<>();
+    private final Map<String, Customer> customers = new HashMap<>();
 
     @PostConstruct
     void init() {
@@ -24,9 +23,9 @@ public class CustomerRepository {
         customers.put(PRO_CUSTOMER_WITH_REVENUE_HIGHER_THAN_ONE_MILLION.getReference(), PRO_CUSTOMER_WITH_REVENUE_HIGHER_THAN_ONE_MILLION);
     }
 
-    public Optional<Customer> get(String customerReference) {
+    public Customer get(String customerReference) {
 
-        return Optional.ofNullable(customers.get(customerReference));
+        return customers.get(customerReference);
     }
 
 }

@@ -55,7 +55,7 @@ class BillingControllerUnitTest {
 
     @SneakyThrows
     @ScenarioParameterizedTest
-    @MethodSource("com.ekwateur.billing.api.setup.methodsources.BillingMethodSources#billingApiErrorScenarios")
+    @MethodSource("com.ekwateur.energybilling.api.setup.methodsources.BillingMethodSources#billingApiErrorScenarios")
     void getBill_should_return_expected_error_result_according_to_the_error_scenario(BillingApiScenario scenario) {
 
         //given
@@ -77,7 +77,7 @@ class BillingControllerUnitTest {
 
     @SneakyThrows
     @ScenarioParameterizedTest
-    @MethodSource("com.ekwateur.billing.api.setup.methodsources.BillingMethodSources#billingApiNominalScenarios")
+    @MethodSource("com.ekwateur.energybilling.api.setup.methodsources.BillingMethodSources#billingApiNominalScenarios")
     void getBill_should_return_expected_result_according_to_the_nominal_scenario(BillingApiScenario scenario) {
 
         //given

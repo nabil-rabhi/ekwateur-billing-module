@@ -2,14 +2,11 @@ package com.ekwateur.enengybilling.api.controller;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-import java.util.Optional;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ekwateur.enengybilling.api.errors.CustomerNotFoundException;
 import com.ekwateur.enengybilling.api.services.CustomerService;
 import com.ekwateur.energybilling.model.customer.Customer;
 
@@ -38,18 +35,12 @@ public class CustomerController {
                tags = {"customers"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "If the customer was successfully returned"),
-            @ApiResponse(responseCode = "404", description = "if no customer was found"),
             @ApiResponse(responseCode = "500", description = "Internal Server error"),
     })
-    Customer getCustomer(@PathVariable("customer-reference") String customerReference) throws CustomerNotFoundException {
+    Customer getCustomer(@PathVariable("customer-reference") String customerReference) {
 
-        Optional<Customer> customer = customerService.getCustomer(customerReference);
+        return customerService.getCustomer(customerReference);
 
-        if (customer.isEmpty()) {
-            throw new CustomerNotFoundException(customerReference);
-        }
-
-        return customer.get();
     }
 
 }
