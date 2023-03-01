@@ -15,7 +15,6 @@ public class RestApiStandardConfiguration {
 
     @Order(Ordered.HIGHEST_PRECEDENCE)
     @Bean
-        //    @ConditionalOnMissingBean(annotation = ControllerAdvice.class)
     StandardExceptionHandler standardExceptionHandler() {
 
         return new StandardExceptionHandler();
