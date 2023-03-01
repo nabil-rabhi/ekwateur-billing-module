@@ -22,6 +22,7 @@ public class BillingService {
 
         return Bill.builder()
                    .customerReference(customer.getReference())
+                   .customerType(customer.getType())
                    .amount(amount(customer, startDate, endDate))
                    .consumption(consumption(customer, startDate, endDate))
                    .build();

@@ -1,8 +1,9 @@
 {
   "customer_reference": "EKW01234567",
+  "customer_type": "Particulier",
   "amount": {
     "electricity_amount": 3.27,
-    "gas_amount": 3.10
+    "gas_amount": 3.1
   },
   "consumption": {
     "gas": 27,

@@ -30,6 +30,7 @@ public sealed class Customer permits ProCustomer, IndividualCustomer {
 
     @Pattern(regexp = "^EKW(\\d{8})$")
     protected String reference;
+    protected CustomerType type;
 
     private final Map<LocalDate, Long> electricityConsumptions = new ConcurrentHashMap<>();
     private final Map<LocalDate, Long> gasConsumptions = new ConcurrentHashMap<>();

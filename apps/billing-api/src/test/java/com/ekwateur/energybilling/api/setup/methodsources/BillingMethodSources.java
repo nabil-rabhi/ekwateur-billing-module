@@ -1,5 +1,7 @@
 package com.ekwateur.energybilling.api.setup.methodsources;
 
+import static com.ekwateur.energybilling.model.customer.CustomerType.INDIVUDUAL;
+import static com.ekwateur.energybilling.model.customer.CustomerType.PROFESSIONAl;
 import static com.ekwateur.energybilling.model.energy.utils.AmountUtil.round;
 import static com.ekwateur.energybilling.test.fixtures.EnergyTypeFixture.END_DATE;
 import static com.ekwateur.energybilling.test.fixtures.EnergyTypeFixture.INDIVIDUAL_CUSTOMER;
@@ -26,6 +28,7 @@ public class BillingMethodSources {
 
     private final Bill INDIVIDUAL_BILL = Bill.builder()
                                              .customerReference(INDIVIDUAL_CUSTOMER.getReference())
+                                             .customerType(INDIVUDUAL)
                                              .amount(Amount.builder()
                                                            .electricityAmount(round(3.27))
                                                            .gasAmount(round(3.10))
@@ -38,6 +41,7 @@ public class BillingMethodSources {
 
     private final Bill BILL_FOR_PRO_WITH_REVENUE_LOWER_THAN_ONE_MILLION = Bill.builder()
                                                                               .customerReference(PRO_CUSTOMER_WITH_REVENUE_LOWER_THAN_ONE_MILLION.getReference())
+                                                                              .customerType(PROFESSIONAl)
                                                                               .amount(Amount.builder()
                                                                                             .electricityAmount(round(3.19))
                                                                                             .gasAmount(round(3.05))
@@ -50,6 +54,7 @@ public class BillingMethodSources {
 
     private final Bill BILL_FOR_PRO_WITH_REVENUE_HIGHER_THAN_ONE_MILLION = Bill.builder()
                                                                                .customerReference(PRO_CUSTOMER_WITH_REVENUE_HIGHER_THAN_ONE_MILLION.getReference())
+                                                                               .customerType(PROFESSIONAl)
                                                                                .amount(Amount.builder()
                                                                                              .electricityAmount(round(3.08))
                                                                                              .gasAmount(round(3.00))

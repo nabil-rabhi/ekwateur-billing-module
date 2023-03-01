@@ -1,5 +1,6 @@
 {
   "customer_reference": "EKW11234567",
+  "customer_type": "Professionnel",
   "amount": {
     "electricity_amount": 3.08,
     "gas_amount": 3.0

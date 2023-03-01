@@ -1,5 +1,8 @@
 package com.ekwateur.energybilling.test.fixtures;
 
+import static com.ekwateur.energybilling.model.customer.CustomerType.INDIVUDUAL;
+import static com.ekwateur.energybilling.model.customer.CustomerType.PROFESSIONAl;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Period;
@@ -24,6 +27,7 @@ public class EnergyTypeFixture {
 
     public static final IndividualCustomer INDIVIDUAL_CUSTOMER = IndividualCustomer.builder()
                                                                                    .reference(REFERENCE_PREFIX + "01234567")
+                                                                                   .type(INDIVUDUAL)
                                                                                    .civility(Civility.MISS)
                                                                                    .firstName("Individual First Name")
                                                                                    .lastName("Individual Last Name")
@@ -31,6 +35,7 @@ public class EnergyTypeFixture {
 
     public static final ProCustomer PRO_CUSTOMER_WITH_REVENUE_HIGHER_THAN_ONE_MILLION = ProCustomer.builder()
                                                                                                    .reference(REFERENCE_PREFIX + "11234567")
+                                                                                                   .type(PROFESSIONAl)
                                                                                                    .revenue(new Revenue(BigDecimal.valueOf(10_000_000)))
                                                                                                    .siret("siret 1")
                                                                                                    .companyName("Company Name 1")
@@ -38,6 +43,7 @@ public class EnergyTypeFixture {
 
     public static final ProCustomer PRO_CUSTOMER_WITH_REVENUE_LOWER_THAN_ONE_MILLION = ProCustomer.builder()
                                                                                                   .reference(REFERENCE_PREFIX + "21234567")
+                                                                                                  .type(PROFESSIONAl)
                                                                                                   .revenue(new Revenue(BigDecimal.valueOf(100_000)))
                                                                                                   .siret("siret 2")
                                                                                                   .companyName("Company Name 2")

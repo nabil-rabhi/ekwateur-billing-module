@@ -1,6 +1,7 @@
 package com.ekwateur.energybilling.model.bill;
 
 import com.ekwateur.api.standards.resources.SnakeCaseable;
+import com.ekwateur.energybilling.model.customer.CustomerType;
 
 import lombok.Builder;
 
@@ -8,6 +9,7 @@ import lombok.Builder;
 public record Bill(
 
         String customerReference,
+        CustomerType customerType,
         Amount amount,
         Consumption consumption
 )
