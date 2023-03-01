@@ -16,8 +16,8 @@
     <name>customers-data-store</name>
 
     <description>
-        this is entry point to the Ekwateur's energy billing module,
-        it contains all the exposed api required to run the program
+        this is the data sotre component for the Ekwateur's energy billing module,
+        it contains all the exposed api required to access the data such as customers, consumption, bills,...
     </description>
 
     <dependencyManagement>
@@ -33,10 +33,17 @@
     </dependencyManagement>
 
     <dependencies>
+
         <!-- project component dependencies -->
         <dependency>
+            <groupId>com.ekwateur.billing</groupId>
+            <artifactId>billing-common-test</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.ekwateur</groupId>
-            <artifactId>billing-model</artifactId>
+            <artifactId>rest-api-standards</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
@@ -102,6 +109,18 @@
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-spring</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-runner</artifactId>
+            <scope>test</scope>
         </dependency>
 
         <dependency>

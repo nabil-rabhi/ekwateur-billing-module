@@ -1,5 +1,7 @@
 package com.ekwateur.enengybilling.api.controller;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
 import java.util.Optional;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,10 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ekwateur.enengybilling.api.errors.CustomerNotFoundException;
-import com.ekwateur.enengybilling.api.services.BillingService;
 import com.ekwateur.enengybilling.api.services.CustomerService;
-import com.ekwateur.enengybilling.model.bill.Bill;
-import com.ekwateur.enengybilling.model.customer.Customer;
+import com.ekwateur.energybilling.model.customer.Customer;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -24,35 +24,32 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/billing")
-@Tag(name = "billing",
-     description = "returns the energy bill of a customer for a period of time")
-public class BillingController {
+@RequestMapping(value = "/customers", produces = APPLICATION_JSON_VALUE)
+@Tag(name = "customers",
+     description = "contains operations on customers")
+public class CustomerController {
 
     @NotNull
-    private final BillingService billingService;
     private final CustomerService customerService;
 
     @GetMapping("/{customer-reference}")
-    @Operation(description = "returns the energy bill of a customer between two dates",
-               summary = "returns the energy bill of a customer between two dates",
-               tags = {"billing"})
+    @Operation(description = "returns a customer by his/her/its reference",
+               summary = "returns a customer by his/her/its reference",
+               tags = {"customers"})
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "If the bill was successfully returned"),
-            @ApiResponse(responseCode = "404", description = "if the customer reference was not found"),
+            @ApiResponse(responseCode = "200", description = "If the customer was successfully returned"),
+            @ApiResponse(responseCode = "404", description = "if no customer was found"),
             @ApiResponse(responseCode = "500", description = "Internal Server error"),
     })
-    Bill getBill(@PathVariable("customer-reference")
-                 String customerReference,
-                 DateRange dateRange) throws CustomerNotFoundException {
+    Customer getCustomer(@PathVariable("customer-reference") String customerReference) throws CustomerNotFoundException {
 
         Optional<Customer> customer = customerService.getCustomer(customerReference);
 
         if (customer.isEmpty()) {
-            throw new CustomerNotFoundException("no customer with reference [%s] was found".formatted(customerReference));
+            throw new CustomerNotFoundException(customerReference);
         }
 
-        return billingService.getBill(customer.get(), dateRange.startDate(), dateRange.endDate());
+        return customer.get();
     }
 
 }
